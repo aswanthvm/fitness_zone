@@ -1,17 +1,33 @@
 body {
   font-family: 'Josefin Sans';
-  background-color: #FFFAFB;
+  background: linear-gradient(135deg, #FFFAFB 0%, #FFF5F7 50%, #FFE8EC 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
 }
 
 * {
   padding: 0px;
   margin: 0px;
   box-sizing: border-box;
-
 }
 
 ::-webkit-scrollbar {
-  width: 0px;
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #FF2625 0%, #FF4444 100%);
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #FF4444 0%, #FF6666 100%);
 }
 
 .right-arrow,
@@ -60,41 +76,68 @@ body {
   width: 700px;
   height: 900px;
   margin-top: -330px;
+}
 
+@keyframes floatAnimation {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
 }
 
 .exercise-card {
   width: 400px;
   height: 445px;
-  background: #fff;
+  background: linear-gradient(145deg, #ffffff 0%, #fff5f7 100%);
   border-top: 4px solid #FF2625;
   border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
   text-decoration: none;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
   padding-bottom: 10px;
   transform: scale(1, 1);
-  transition: 0.3s all ease-in-out;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 8px 20px rgba(255, 38, 37, 0.1);
+  overflow: hidden;
 }
 
 .exercise-card img {
   height: 326px;
+  transition: transform 0.4s ease;
 }
 
 .bodyPart-card {
   transform: scale(1, 1);
-  transition: 0.3s all ease-in-out;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.exercise-card:hover,
+.exercise-card:hover {
+  transform: scale(1.05, 1.05) translateY(-10px);
+  box-shadow: 0 15px 40px rgba(255, 38, 37, 0.25);
+}
+
+.exercise-card:hover img {
+  transform: scale(1.1);
+}
+
 .bodyPart-card:hover {
   transform: scale(1.1, 1.1);
 }
 
+.search-btn {
+  background: linear-gradient(135deg, #FF2625 0%, #FF4444 100%) !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 15px rgba(255, 38, 37, 0.3) !important;
+}
+
 .search-btn:hover {
-  color: #FF2625 !important;
-  border: 1px solid #FF2625 !important;
+  background: linear-gradient(135deg, #FF4444 0%, #FF2625 100%) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 38, 37, 0.4) !important;
 }
 
 .exercise-video {
