@@ -1,13 +1,14 @@
 import React from 'react';
 import { Typography, Stack, Button } from '@mui/material';
+import { getExerciseImageUrl } from '../utils/exerciseImages';
 
 import BodyPartImage from '../assets/icons/body-part.png';
 import TargetImage from '../assets/icons/target.png';
 import EquipmentImage from '../assets/icons/equipment.png';
 
 const Detail = ({ exerciseDetail }) => {
-  const { bodyPart, gifUrl, name, target, equipment, id } = exerciseDetail;
-  const imageUrl = gifUrl || `https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/${id}/images/0.jpg`;
+  const { bodyPart, name, target, equipment } = exerciseDetail;
+  const imageUrl = getExerciseImageUrl(exerciseDetail);
 
   const extraDetail = [
     {
@@ -26,7 +27,12 @@ const Detail = ({ exerciseDetail }) => {
 
   return (
     <Stack gap="60px" sx={{ flexDirection: { lg: 'row' }, p: '20px', alignItems: 'center' }}>
-      <img src={imageUrl} alt={name} loading="lazy" className="detail-image" />
+      <img 
+        src={imageUrl} 
+        alt={name} 
+        loading="lazy" 
+        className="detail-image"
+      />
       <Stack sx={{ gap: { lg: '35px', xs: '20px' } }}>
         <Typography sx={{ fontSize: { lg: '64px', xs: '30px' } }} fontWeight={700} textTransform="capitalize">
           {name}
