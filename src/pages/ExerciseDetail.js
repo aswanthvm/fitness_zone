@@ -27,7 +27,11 @@ const ExerciseDetail = () => {
 
         const exerciseVideosData = await fetchData(`${youtubeSearchUrl}/search?query=${exerciseDetailData.name} exercise`, youtubeOptions);
         console.log('YouTube API Response:', exerciseVideosData);
-        setExerciseVideos(exerciseVideosData.contents || []);
+        
+        // Handle different possible response structures
+        const videos = exerciseVideosData?.contents || exerciseVideosData?.items || exerciseVideosData || [];
+        console.log('Extracted videos:', videos);
+        setExerciseVideos(videos);
 
         const targetMuscleExercisesData = await fetchData(`${exerciseDbUrl}/exercises/target/${exerciseDetailData.target}?limit=1000`, exerciseOptions);
         setTargetMuscleExercises(targetMuscleExercisesData);
@@ -37,6 +41,12 @@ const ExerciseDetail = () => {
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error('Error fetching exercise details:', error);
+        console.error('Error details:', {
+          message: error.message,
+          stack: error.stack
+        });
+        // Set empty arrays to prevent component crashes
+        setExerciseVideos([]);
       }
     };
 

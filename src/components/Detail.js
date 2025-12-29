@@ -7,7 +7,7 @@ import EquipmentImage from '../assets/icons/equipment.png';
 
 const Detail = ({ exerciseDetail }) => {
   const { bodyPart, gifUrl, name, target, equipment, id } = exerciseDetail;
-  const imageUrl = gifUrl || `https://v2.exercisedb.io/image/${id}`;
+  const imageUrl = gifUrl || `https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/${id}/images/0.jpg`;
 
   const extraDetail = [
     {

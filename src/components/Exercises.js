@@ -15,12 +15,14 @@ const Exercises = ({ exercises, setExercises, bodyPart }) => {
       let exercisesData = [];
 
       try {
+        console.log('Fetching exercises for bodyPart:', bodyPart);
         if (bodyPart === 'all') {
-          exercisesData = await fetchData('https://exercisedb.p.rapidapi.com/exercises', exerciseOptions);
+          exercisesData = await fetchData('https://exercisedb.p.rapidapi.com/exercises?limit=1000', exerciseOptions);
         } else {
-          exercisesData = await fetchData(`https://exercisedb.p.rapidapi.com/exercises/bodyPart/${bodyPart}`, exerciseOptions);
+          exercisesData = await fetchData(`https://exercisedb.p.rapidapi.com/exercises/bodyPart/${bodyPart}?limit=1000`, exerciseOptions);
         }
 
+        console.log('Exercises fetched:', exercisesData?.length || 0);
         setExercises(exercisesData);
       } catch (error) {
         // eslint-disable-next-line no-console
@@ -50,7 +52,9 @@ const Exercises = ({ exercises, setExercises, bodyPart }) => {
       <Typography variant="h4" fontWeight="bold" sx={{ fontSize: { lg: '44px', xs: '30px' } }} mb="46px">Showing Results</Typography>
       <Stack direction="row" sx={{ gap: { lg: '107px', xs: '50px' } }} flexWrap="wrap" justifyContent="center">
         {currentExercises.map((exercise, idx) => (
-          <ExerciseCard key={idx} exercise={exercise} />
+          <div key={idx} style={{ animationDelay: `${idx * 0.1}s` }}>
+            <ExerciseCard exercise={exercise} />
+          </div>
         ))}
       </Stack>
       <Stack sx={{ mt: { lg: '114px', xs: '70px' } }} alignItems="center">
